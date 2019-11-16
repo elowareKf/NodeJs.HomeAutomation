@@ -3,15 +3,15 @@ const router = express.Router();
 const fileReader = require('../services/fileReader');
 
 router.get('/', function (req, res, next) {
-    res.json(getOutputValues());
+    res.json(getStatus());
 }).post('/', function (req, res, next) {
     res.json({value: 3});
 });
 
-function getOutputValues() {
+function getStatus() {
     return {
         names: fileReader.readNamesFile(),
-        values: [false, false, true]
+        values: fileReader.getOutputValues()
     }
 }
 
