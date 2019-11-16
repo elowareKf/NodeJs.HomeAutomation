@@ -1,4 +1,5 @@
 const fs = require('fs');
+const filePath = 'piControl0';
 
 exports.readNamesFile = function () {
     const result = fs.readFileSync("names.txt", "utf8");
@@ -7,11 +8,9 @@ exports.readNamesFile = function () {
 };
 
 exports.getOutputValues = function () {
-    var filePath = 'piControl0';
     let fileData = fs.readFileSync(filePath);
-
     let ios = [];
-    for (let i = 0x50; i < 0x53; i++) {
+    for (let i = 0x50; i <= 0x53; i++) {
         let byte = fileData[i];
         ios.push((byte & 0x01) != 0x00 ? true: false);
         ios.push((byte & 0x02) != 0x00 ? true: false);
@@ -23,4 +22,12 @@ exports.getOutputValues = function () {
         ios.push((byte & 0x80) != 0x00 ? true: false);
     }
     return ios;
+};
+
+exports.switchAllOff = function(){
+
+};
+
+exports.setOutput = function(io, value){
+
 };
