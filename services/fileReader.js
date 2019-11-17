@@ -2,7 +2,7 @@ const fs = require('fs');
 const BinaryFile = require('binary-file');
 
 const filePath = 'piControl0';
-const offset = 0x50;
+const offset = 0x51;
 
 exports.readNamesFile = function () {
     const result = fs.readFileSync("names.txt", "utf8");
@@ -35,7 +35,7 @@ async function getFileContent() {
     const piControl0 = new BinaryFile(filePath, 'r');
     await piControl0.open();
     const size = await piControl0.size();
-    let buffer = await piControl0.read(size, 0);
+    let buffer = await piControl0.read(20, offset);
     await piControl0.close();
     return buffer;
 }
@@ -44,9 +44,9 @@ exports.switchAllOff = async function () {
     const content = await getFileContent();
     const piControl0 = new BinaryFile(filePath, 'w');
     await piControl0.open();
+    await piControl0.seek(offset);
 
-
-    for (let i = 0; i < content.length; i++) {
+    for (let i = offset; i < offset + content.length; i++) {
         if (i < offset || i > offset + 4)
             await piControl0.writeUInt8(content[i]);
         else
@@ -59,13 +59,14 @@ exports.setOutput = async function (io, value) {
     const content = await getFileContent();
     const piControl0 = new BinaryFile(filePath, 'w');
     await piControl0.open();
+    await piControl0.seek(offset);
 
     const position = offset + Math.floor(io / 8);
-    for (let i = 0; i < content.length; i++) {
+    for (let i = offset; i < offset + content.length; i++) {
         if (i != position)
-            await piControl0.writeUInt8(content[i]);
+            await piControl0.writeUInt8(content[i-offset]);
         else {
-            let byte = content[i];
+            let byte = content[i-offset];
             if (value)
                 byte = byte | (1 << (io % 8));
             else
