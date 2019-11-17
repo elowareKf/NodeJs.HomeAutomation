@@ -3,15 +3,29 @@ const router = express.Router();
 const fileReader = require('../services/fileReader');
 
 router.get('/', function (req, res, next) {
-    res.json(getStatus());
+    sendStatus(res);
+}).put('/', function (req, res, next) {
+    const data = req.body;
+
+    fileReader.setOutput(data.io, data.value).then(() => {
+        sendStatus(res);
+    });
 }).post('/', function (req, res, next) {
-    res.json({value: 3});
+    fileReader.switchAllOff().then(() => {
+        sendStatus(res);
+    });
 });
 
-function getStatus() {
+function sendStatus(res) {
+    getStatus().then((data) => {
+        res.json(data);
+    });
+}
+
+async function getStatus() {
     return {
         names: fileReader.readNamesFile(),
-        values: fileReader.getOutputValues()
+        values: await fileReader.getOutputValues()
     }
 }
 
