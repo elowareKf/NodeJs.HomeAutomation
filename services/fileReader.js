@@ -17,17 +17,20 @@ exports.getOutputValues = async function () {
 
     await piControl0.seek(offset);
     let ios = [];
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 2; i++) {
         let byte = await piControl0.readUInt8();
-        ios.push((byte & 0x01) != 0x00 ? true : false);
-        ios.push((byte & 0x02) != 0x00 ? true : false);
-        ios.push((byte & 0x04) != 0x00 ? true : false);
-        ios.push((byte & 0x08) != 0x00 ? true : false);
-        ios.push((byte & 0x10) != 0x00 ? true : false);
-        ios.push((byte & 0x20) != 0x00 ? true : false);
-        ios.push((byte & 0x40) != 0x00 ? true : false);
-        ios.push((byte & 0x80) != 0x00 ? true : false);
+        ios.push((byte & 0x01) != 0x00 ? 255 : 0);
+        ios.push((byte & 0x02) != 0x00 ? 255 : 0);
+        ios.push((byte & 0x04) != 0x00 ? 255 : 0);
+        ios.push((byte & 0x08) != 0x00 ? 255 : 0);
+        ios.push((byte & 0x10) != 0x00 ? 255 : 0);
+        ios.push((byte & 0x20) != 0x00 ? 255 : 0);
+        ios.push((byte & 0x40) != 0x00 ? 255 : 0);
+        ios.push((byte & 0x80) != 0x00 ? 255 : 0);
     }
+    for (let i = 0; i < 16; i++)
+        ios.push(await piControl0.readUInt8());
+
     await piControl0.close();
     return ios;
 };
@@ -59,16 +62,16 @@ exports.setOutput = async function (io, value) {
     await piControl0.open();
     await piControl0.seek(offset);
 
-    const position = offset + Math.floor(io / 8);
+    const position = offset + (io > 15 ? io - 14 : Math.floor(io / 8));
     for (let i = offset; i < offset + content.length; i++) {
         if (i != position)
             await piControl0.writeUInt8(content[i - offset]);
         else {
-            if (i <= pwmOffset) {
+            if (io > 15) {
                 await piControl0.writeUInt8(value);
             } else {
                 let byte = content[i - offset];
-                if (value)
+                if (value > 0)
                     byte = byte | (1 << (io % 8));
                 else
                     byte = byte & (0xFF ^ (1 << (io % 8)));
