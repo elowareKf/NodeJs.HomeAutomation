@@ -1,6 +1,1 @@
-Garage
-Lampe
-Einfahrt
-Pool
-Dusche
-Kühlschrank
+Einfahrt,Garage,Pool,Dusche,Item #24,Item #24,Item #24,Item #24,Item #24,Item #24,Item #24,Item #24,Item #24,Item #24,Item #24,Item #24,Item #24,Item #24,Item #24,Item #24,Item #24,Item #24,Item #24,Item #24,Update

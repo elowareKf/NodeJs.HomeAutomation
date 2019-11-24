@@ -5,11 +5,6 @@ const filePath = 'piControl0';
 const offset = 0x51;
 const pwmOffset = 0x53;
 
-exports.readNamesFile = function () {
-    const result = fs.readFileSync("names.txt", "utf8");
-    let resultArray = result.split('\n');
-    return resultArray.slice(0, resultArray.length - 1);
-};
 
 exports.getOutputValues = async function () {
     const piControl0 = new BinaryFile(filePath, 'r');
