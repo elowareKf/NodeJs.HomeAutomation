@@ -1,8 +1,6 @@
 RevPiStatus		 0	 //BYTE  
 RevPiIOCycle		 1	 //BYTE  
 RevPiLED		 6	 //BYTE  
-Output_Status		 13	 //WORD  
-Status		 15	 //WORD  
 O_1		 81.0	 //BOOL  
 O_2		 81.1	 //BOOL  
 O_3		 81.2	 //BOOL  
@@ -19,23 +17,35 @@ O_13		 81.12	 //BOOL
 O_14		 81.13	 //BOOL  
 O_15		 81.14	 //BOOL  
 O_16		 81.15	 //BOOL  
-PWM_1		 83	 //USINT  
-PWM_2		 84	 //USINT  
-PWM_3		 85	 //USINT  
-PWM_4		 86	 //USINT  
-PWM_5		 87	 //USINT  
-PWM_6		 88	 //USINT  
-PWM_7		 89	 //USINT  
-PWM_8		 90	 //USINT  
-PWM_9		 91	 //USINT  
-PWM_10		 92	 //USINT  
-PWM_11		 93	 //USINT  
-PWM_12		 94	 //USINT  
-PWM_13		 95	 //USINT  
-PWM_14		 96	 //USINT  
-PWM_15		 97	 //USINT  
-PWM_16		 98	 //USINT  
-OutputPushPull		 117	 // ##ATTR_COMMENT## 
-OutputOpenLoadDetect		 119	 // ##ATTR_COMMENT## 
-OutputPWMActive		 121	 // ##ATTR_COMMENT## 
-OutputPWMFrequency		 123	 // ##ATTR_COMMENT## 
+I_1		 124.0	 //BOOL  
+I_2		 124.1	 //BOOL  
+I_3		 124.2	 //BOOL  
+I_4		 124.3	 //BOOL  
+I_5		 124.4	 //BOOL  
+I_6		 124.5	 //BOOL  
+I_7		 124.6	 //BOOL  
+I_8		 124.7	 //BOOL  
+I_9		 124.8	 //BOOL  
+I_10		 124.9	 //BOOL  
+I_11		 124.10	 //BOOL  
+I_12		 124.11	 //BOOL  
+I_13		 124.12	 //BOOL  
+I_14		 124.13	 //BOOL  
+I_15		 124.14	 //BOOL  
+I_16		 124.15	 //BOOL  
+O_1_i03		 194.0	 //BOOL  
+O_2_i03		 194.1	 //BOOL  
+O_3_i03		 194.2	 //BOOL  
+O_4_i03		 194.3	 //BOOL  
+O_5_i03		 194.4	 //BOOL  
+O_6_i03		 194.5	 //BOOL  
+O_7_i03		 194.6	 //BOOL  
+O_8_i03		 194.7	 //BOOL  
+O_9_i03		 194.8	 //BOOL  
+O_10_i03		 194.9	 //BOOL  
+O_11_i03		 194.10	 //BOOL  
+O_12_i03		 194.11	 //BOOL  
+O_13_i03		 194.12	 //BOOL  
+O_14_i03		 194.13	 //BOOL  
+O_15_i03		 194.14	 //BOOL  
+O_16_i03		 194.15	 //BOOL  
