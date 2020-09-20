@@ -58,3 +58,27 @@ gesetzt werden müssen.
 |O_14_i03		    |194.13	 |//BOOL     |  
 |O_15_i03		    |194.14	 |//BOOL     |  
 |O_16_i03		    |194.15	 |//BOOL     |  
+
+
+## /etc/init.d script
+
+The header of the script
+
+```sh
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides: homebridge
+# Required-Start:    $network $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start daemon at boot time
+# Description:       Enable service provided by daemon.
+### END INIT INFO
+```
+
+to install the script run
+
+```sh
+sudo update-rc.d homeserver defaults
+```
