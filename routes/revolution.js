@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const fileReader = require('../services/fileReader');
+const namesFile  = require("../services/namesFile");
 
 router.get('/', function (req, res, next) {
     sendStatus(res);
-}).put('/', function (req, res, next) {
+}).patch('/', function (req, res, next) {
     const data = req.body;
 
     fileReader.setOutput(data.io, data.value).then(() => {
@@ -14,6 +15,16 @@ router.get('/', function (req, res, next) {
     fileReader.switchAllOff().then(() => {
         sendStatus(res);
     });
+}).put('/', function(req, res, next){
+    try{
+        const data = req.body;
+        namesFile.updateName(data.io, data.description);
+        res.sendStatus(201);
+    }
+    catch (e) {
+        res.sendStatus(500);
+        console.log(e.message);
+    }
 });
 
 function sendStatus(res) {
@@ -24,7 +35,7 @@ function sendStatus(res) {
 
 async function getStatus() {
     return {
-        names: fileReader.readNamesFile(),
+        names: namesFile.readNamesFile(),
         values: await fileReader.getOutputValues()
     }
 }
